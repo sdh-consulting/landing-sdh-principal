@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDH · Ingeniería & Tecnología</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET Y VARIABLES GLOBALES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --ink: #0b0d11;
+            --line: #e5e7eb;
+            --brand1: #4f46e5;
+            --brand2: #06b6d4;
+            --space: 16px;
+            --card: #fbfbfc;
+            --muted: #4b5563;
+            --hover1: #ffffff;
+            --hover2: #e8f1ff;
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            color: var(--ink);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ========== SECCIÓN A: HEADER + NAV ========== */
+        #sdh-header header {
+            position: sticky;
+            top: 0;
+            z-index: 90;
+            backdrop-filter: saturate(180%) blur(8px);
+            background: rgba(255, 255, 255, .78);
+            border-bottom: 1px solid rgba(0, 0, 0, .06);
+        }
+
+        #sdh-header .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 var(--space);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--ink);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .brand img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .brand-name {
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: -.2px;
+            color: #0b0d11;
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tag {
+            font-size: 13px;
+            color: #555;
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--brand1), var(--brand2));
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all .25s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(6, 182, 212, .25);
+        }
+
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-link:hover {
+            background: rgba(0, 0, 0, .05);
+        }
+
+        .chev {
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            opacity: .7;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .menu {
+            position: absolute;
+            top: 110%;
+            left: 0;
+            min-width: 220px;
+            padding: 8px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+            display: none;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: #222;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            background: #f8f8f9;
+        }
+
+        .dropdown.open .menu {
+            display: block;
+        }
+
+        .lang {
+            position: relative;
+        }
+
+        .lang-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            color: #374151;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .lang-btn:hover {
+            background: rgba(0, 0, 0, .05);
+        }
+
+        .globe {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            flex: 0 0 auto;
+            background: radial-gradient(circle at 50% 50%, #4f46e5 0%, #06b6d4 100%);
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23000" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2Zm0 2c1.657 0 3.156.672 4.243 1.757L15 8h-2l-1 2-2 1v2l-1 1H6l-1-2c.183-.64.462-1.24.82-1.784C6.904 8.81 9.28 7 12 7c.34 0 .674.025 1 .074V4ZM5.757 17.243 8 16h2l2 2v2c-2.72 0-5.096-1.81-6.243-2.757ZM13 20v-2l1-2 3-1 1-2-.5-1.5L20 10c0 3.866-3.134 7-7 7Z"/></svg>') center/contain no-repeat;
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23000" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2Zm0 2c1.657 0 3.156.672 4.243 1.757L15 8h-2l-1 2-2 1v2l-1 1H6l-1-2c.183-.64.462-1.24.82-1.784C6.904 8.81 9.28 7 12 7c.34 0 .674.025 1 .074V4ZM5.757 17.243 8 16h2l2 2v2c-2.72 0-5.096-1.81-6.243-2.757ZM13 20v-2l1-2 3-1 1-2-.5-1.5L20 10c0 3.866-3.134 7-7 7Z"/></svg>') center/contain no-repeat;
+        }
+
+        .lang-menu {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+            padding: 6px;
+            display: none;
+            min-width: 140px;
+        }
+
+        .lang.open .lang-menu {
+            display: block;
+        }
+
+        .lang-menu a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #111827;
+            font-size: 13px;
+        }
+
+        .lang-menu a:hover {
+            background: #f8f8f9;
+        }
+
+        .lang-menu a.active {
+            background: linear-gradient(90deg, #eef2ff, #e0f7ff);
+            font-weight: 600;
+        }
+
+        @media (max-width: 520px) {
+            .nav-cta {
+                gap: 8px;
+            }
+            .tag {
+                display: none;
+            }
+        }
+
+        /* ========== SECCIÓN B: HERO ========== */
+        #sdh-hero {
+            padding: clamp(68px, 9vw, 120px) 0 clamp(56px, 8vw, 108px);
+            text-align: center;
+            background: radial-gradient(100% 60% at 50% 0%, #fff 0%, #fff 45%, #f5f7ff 100%);
+            overflow: hidden;
+        }
+
+        #sdh-hero .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 2.2vw, 28px);
+        }
+
+        #sdh-hero h1 {
+            font-size: clamp(56px, 8.5vw, 96px);
+            line-height: 1.08;
+            letter-spacing: -.02em;
+            margin: 0 0 18px;
+        }
+
+        #sdh-hero .lead {
+            font-size: clamp(18px, 2.3vw, 24px);
+            color: #2b2b2b;
+            margin: 0 0 31px;
+            max-width: 860px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #sdh-hero .btn {
+            margin-bottom: 4px;
+            padding: 12px 22px;
+        }
+
+        #sdh-hero .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(6, 182, 212, .25);
+        }
+
+        .logo-marquee {
+            position: relative;
+            overflow: hidden;
+            margin-top: 77px;
+        }
+
+        .logo-strip {
+            display: flex;
+            align-items: center;
+            gap: 96px;
+            width: max-content;
+            will-change: transform;
+            animation: logosLoop 40s linear infinite;
+            transform: translateX(0);
+        }
+
+        .logo-strip.paused {
+            animation-play-state: paused;
+        }
+
+        .logo-strip img {
+            height: 170px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(0.85);
+            opacity: .9;
+            transition: filter .3s ease, opacity .3s ease, transform .3s ease;
+        }
+
+        .logo-strip img:hover {
+            filter: none;
+            opacity: 1;
+            transform: scale(1.06);
+        }
+
+        @keyframes logosLoop {
+            from {
+                transform: translateX(0)
+            }
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .logo-strip {
+                gap: 72px;
+            }
+            .logo-strip img {
+                height: 130px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-strip {
+                gap: 56px;
+            }
+            .logo-strip img {
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-strip {
+                gap: 40px;
+            }
+            .logo-strip img {
+                height: 80px;
+            }
+        }
+
+        /* ========== SECCIÓN C: KPI ROW ========== */
+        #sdh-kpis {
+            padding: clamp(60px, 8vw, 100px) 0;
+        }
+
+        #sdh-kpis .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 2.2vw, 28px);
+        }
+
+        .kpi-wrap {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .kpi {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 14px;
+            border-radius: 16px;
+            background: var(--card);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 10px 30px rgba(0, 0, 0, .06);
+            border: 1px solid var(--line);
+            text-align: center;
+            min-height: 160px;
+            transition: all 0.35s ease;
+        }
+
+        .kpi:hover {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 12px 38px rgba(0, 0, 0, .12);
+            background: linear-gradient(90deg, var(--hover1) 0%, var(--hover2) 100%);
+        }
+
+        .kpi .val {
+            font-weight: 800;
+            font-size: clamp(26px, 3vw, 34px);
+            line-height: 1;
+            letter-spacing: -.01em;
+            color: var(--ink);
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kpi .lbl {
+            font-weight: 700;
+            font-size: clamp(15px, 2.1vw, 18px);
+            color: #111827;
+        }
+
+        .kpi .sub {
+            font-size: clamp(13px, 1.7vw, 14px);
+            color: #4b5563;
+            line-height: 1.45;
+            max-width: 90%;
+        }
+
+        @media(max-width: 980px) {
+            .kpi-wrap {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 14px;
+            }
+            .kpi {
+                padding: 16px;
+                min-height: 140px;
+            }
+            .kpi .val {
+                font-size: 24px;
+                min-height: 36px;
+            }
+            .kpi .lbl {
+                font-size: 15px;
+            }
+            .kpi .sub {
+                font-size: 13px;
+            }
+        }
+
+        @media(max-width: 640px) {
+            .kpi-wrap {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            .kpi {
+                padding: 10px;
+                min-height: 120px;
+            }
+            .kpi .val {
+                font-size: 20px;
+                min-height: 32px;
+            }
+            .kpi .lbl {
+                font-size: 13px;
+            }
+            .kpi .sub {
+                font-size: 12px;
+            }
+        }
+
+        /* ========== SECCIÓN D: PROBLEMA → SOLUCIÓN ========== */
+        #sdh-problema,
+        #sdh-problema * {
+            box-sizing: border-box;
+        }
+
+        #sdh-problema {
+            min-height: 72vh;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            background: linear-gradient(145deg, #1a002d 0%, #4b0d63 35%, #1b1f70 70%, #000814 100%);
+            padding: clamp(64px, 8vw, 120px) 0;
+            overflow-x: hidden;
+            color: #fff;
+        }
+
+        #sdh-problema .inner {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 4vw, 40px);
+        }
+
+        #sdh-problema h2 {
+            margin: 0 0 12px;
+            font-size: clamp(32px, 3.5vw, 54px);
+            line-height: 1.2;
+            color: #fff;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        #sdh-problema p {
+            color: #e5e7eb;
+            font-size: clamp(16px, 1.7vw, 22px);
+            margin: 0 auto 28px;
+            max-width: 860px;
+            padding: 0 2px;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        .compare {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+            align-items: start;
+            justify-items: stretch;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: left;
+            width: 100%;
+            min-width: 0;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, .35);
+        }
+
+        .card h4 {
+            margin: 0 0 10px;
+            color: #fff;
+            font-size: clamp(16px, 1.4vw, 20px);
+            line-height: 1.25;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+        }
+
+        .card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            color: #f3f4f6;
+            display: grid;
+            gap: 8px;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 18px;
+            line-height: 1.45;
+            font-size: clamp(13px, 1.25vw, 16px);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .card ul li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: .55em;
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+        }
+
+        .bad li::before {
+            background: #ef4444;
+        }
+
+        .good li::before {
+            background: linear-gradient(90deg, #4f46e5, #06b6d4);
+        }
+
+        @media (max-width: 900px) {
+            #sdh-problema .inner {
+                padding: 0 16px;
+            }
+            .compare {
+                gap: 14px;
+            }
+            .card {
+                padding: 14px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            #sdh-problema .inner {
+                padding: 0 14px;
+            }
+            .compare {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            #sdh-problema h2 {
+                font-size: clamp(26px, 7vw, 34px);
+            }
+            #sdh-problema p {
+                font-size: 15px;
+            }
+            .card h4 {
+                font-size: 15px;
+            }
+            .card ul li {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .compare {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== SECCIÓN E: RESULTADOS ========== */
+        #resultados {
+            padding: clamp(60px, 8vw, 100px) 0;
+            background: #fff;
+        }
+
+        #resultados .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 2.2vw, 28px);
+        }
+
+        .section-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .section-head h3 {
+            font-size: clamp(32px, 3.5vw, 54px);
+            margin: 0;
+        }
+
+        .kpi-cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(260px, 1fr));
+            gap: calc(14px * 1.1);
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 10px;
+            padding-right: calc(14px * 1.1);
+        }
+
+        .kpi-cards::-webkit-scrollbar {
+            display: none;
+        }
+
+        .kpi-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 0 0 1px var(--line), 0 1px 2px rgba(0, 0, 0, .05), 0 10px 30px rgba(0, 0, 0, .06);
+            background: var(--card);
+            border: 1px solid var(--line);
+            padding: 18px;
+            min-width: 260px;
+            flex-shrink: 0;
+            text-align: center;
+            transition: all 0.35s ease;
+            cursor: pointer;
+            scroll-snap-align: start;
+        }
+
+        .kpi-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: transparent;
+            transition: background .35s ease, opacity .35s ease;
+            z-index: 0;
+        }
+
+        .kpi-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .kpi-card:hover,
+        .kpi-card:focus,
+        .kpi-card:active {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 0 0 1px #d7def0, 0 12px 38px rgba(0, 0, 0, .12);
+            outline: none;
+        }
+
+        .kpi-card:hover::before,
+        .kpi-card:focus::before,
+        .kpi-card:active::before {
+            background: linear-gradient(90deg, var(--hover1) 0%, var(--hover2) 100%);
+            opacity: 1;
+        }
+
+        .kpi-card .big {
+            font-size: clamp(26px, 3vw, 34px);
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .kpi-card p {
+            margin: 8px 0 0;
+            color: #6b7280;
+        }
+
+        @media(max-width: 480px) {
+            .kpi-cards {
+                grid-template-columns: repeat(3, minmax(220px, 1fr));
+                gap: 12px;
+                padding-right: 12px;
+            }
+            .kpi-card {
+                min-width: 220px;
+                padding: 16px;
+            }
+            .kpi-card .big {
+                font-size: 24px;
+            }
+        }
+
+        /* ========== SECCIÓN F: INTEGRACIÓN BIM ========== */
+        #sdh-integracion-bim {
+            background: #fff;
+        }
+
+        #sdh-integracion-bim .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: clamp(36px, 6vw, 56px) clamp(16px, 2.2vw, 28px);
+        }
+
+        #sdh-integracion-bim .card {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 22px;
+            align-items: center;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            padding: clamp(16px, 2.5vw, 26px);
+            color: var(--ink);
+        }
+
+        .media {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid var(--line);
+            background: #f9fafb;
+            min-height: 280px;
+        }
+
+        .media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .glow {
+            position: absolute;
+            inset: auto -15% -15% -15%;
+            height: 40%;
+            background: radial-gradient(65% 80% at 50% 100%, rgba(79, 70, 229, .15), rgba(6, 182, 212, .08) 40%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 6px;
+        }
+
+        .title {
+            font-size: clamp(26px, 3vw, 38px);
+            line-height: 1.12;
+            letter-spacing: -.015em;
+            color: var(--ink);
+            margin: 6px 0 10px;
+        }
+
+        .lead {
+            font-size: clamp(16px, 2vw, 18px);
+            color: var(--muted);
+            margin: 0 0 16px;
+        }
+
+        .actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        @media(max-width: 980px) {
+            #sdh-integracion-bim .card {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .media {
+                min-height: 240px;
+            }
+        }
+
+        /* ========== SECCIÓN G: METODOLOGÍA ========== */
+        #metodologia {
+            padding-top: clamp(60px, 8vw, 100px);
+        }
+
+        #metodologia .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 2.2vw, 28px);
+        }
+
+        .section-left {
+            flex: 1;
+            text-align: left;
+            min-width: 300px;
+        }
+
+        .section-left h3 {
+            font-size: clamp(32px, 3.5vw, 54px);
+            margin: 0;
+            color: #0b0d11;
+            line-height: 1.15;
+            word-break: break-word;
+        }
+
+        .section-sub {
+            font-size: clamp(16px, 2vw, 18px);
+            color: #4b5563;
+            max-width: 640px;
+            line-height: 1.45;
+            margin-top: 6px;
+        }
+
+        .section-head .tag {
+            white-space: nowrap;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .flow {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 16px;
+            align-items: flex-start;
+            margin-top: 18px;
+        }
+
+        .p-step {
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .p-step:hover {
+            transform: translateY(-6px);
+        }
+
+        .p-ring {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 10px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #fff 55%, #f2f4f7 56%, #e5e7eb 62%, #fff 63%);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+            transition: all 0.3s ease;
+        }
+
+        .p-step:hover .p-ring {
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, .3), 0 10px 24px rgba(6, 182, 212, .25);
+            background: radial-gradient(circle at 30% 30%, #f0f9ff 0%, #e0f7ff 55%, #bae6fd 100%);
+        }
+
+        .p-icon {
+            width: 62px;
+            height: 62px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            background: #fff;
+            box-shadow: 0
+6px 20px rgba(0, 0, 0, .10);
+            transition: transform 0.3s ease;
+        }
+
+        .p-step:hover .p-icon {
+            transform: scale(1.1);
+        }
+
+        .p-title {
+            font-weight: 700;
+            margin: 6px 0 4px;
+            color: #0b0d11;
+        }
+
+        .p-desc {
+            color: #6b7280;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        @media(max-width: 1080px) {
+            .flow {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media(max-width: 640px) {
+            .flow {
+                grid-template-columns: 1fr;
+            }
+            .p-ring {
+                width: 96px;
+                height: 96px;
+            }
+            .p-icon {
+                width: 56px;
+                height: 56px;
+            }
+            .section-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .tag {
+                margin-top: 6px;
+            }
+        }
+
+        /* ========== SECCIÓN H: PROYECTOS ========== */
+        #proyectos {
+            padding-top: clamp(60px, 8vw, 100px);
+        }
+
+        #proyectos .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 2.2vw, 28px);
+        }
+
+        .intro {
+            max-width: 860px;
+            margin: 0 0 16px 0;
+            color: #333;
+            font-size: clamp(13px, 1.6vw, 19px);
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .track {
+            display: flex;
+            gap: 14px;
+            will-change: transform;
+        }
+
+        .slide {
+            flex: 0 0 33.6%;
+            min-width: 336px;
+            aspect-ratio: 16/7.5;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .05), 0 12px 36px rgba(0, 0, 0, .08);
+            background: #f2f4f7;
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .slide:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 38px rgba(0, 0, 0, .12);
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cap {
+            font-size: 13px;
+            color: #555;
+            margin-top: 6px;
+            text-align: center;
+        }
+
+        @media(max-width: 980px) {
+            .slide {
+                flex-basis: 58%;
+                min-width: 300px;
+            }
+        }
+
+        @media(max-width: 640px) {
+            .slide {
+                flex-basis: 100%;
+                min-width: 100%;
+                aspect-ratio: 16/10;
+            }
+        }
+
+        /* ========== SECCIÓN I: VENTAJAS ========== */
+        #ventajas {
+            padding-top: clamp(60px, 8vw, 100px);
+        }
+
+        #ventajas .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 2.2vw, 28px);
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 14px;
+        }
+
+        .benefit {
+            grid-column: span 4;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            background: #fbfbfc;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 10px 30px rgba(0, 0, 0, .06);
+            padding: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .benefit:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 35px rgba(6, 182, 212, .25);
+            border-color: #06b6d4;
+            background: linear-gradient(180deg, #ffffff 0%, #f0fbff 100%);
+        }
+
+        .benefit .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: #06b6d4;
+            margin-top: 6px;
+            flex: 0 0 auto;
+        }
+
+        .benefit h4 {
+            margin: 0 0 4px;
+            font-size: clamp(19px, 2.1vw, 22px);
+            font-weight: 700;
+            color: #0b0d11;
+        }
+
+        .benefit p {
+            margin: 0;
+            color: #4b5563;
+            font-size: clamp(16px, 1.8vw, 18px);
+            line-height: 1.45;
+        }
+
+        @media(max-width: 980px) {
+            .benefit {
+                grid-column: span 6;
+            }
+        }
+
+        @media(max-width: 640px) {
+            .benefit {
+                grid-column: span 12;
+            }
+        }
+
+        /* ========== SECCIÓN J: PROPIETARIOS ========== */
+        #sdh-prop-dev {
+            background: #fff;
+            color: var(--ink);
+            padding: clamp(36px, 6vw, 56px) 0;
+        }
+
+        #sdh-prop-dev .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: clamp(36px, 6vw, 56px) clamp(16px, 2.2vw, 28px);
+        }
+
+        #sdh-prop-dev .card {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 22px;
+            align-items: center;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+            padding: clamp(16px, 2.5vw, 26px);
+        }
+
+        #sdh-prop-dev .content {
+            padding: 10px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(79, 70, 229, .12), rgba(6, 182, 212, .12));
+            border: 1px solid rgba(0, 0, 0, .06);
+            font-weight: 600;
+            font-size: 13px;
+            color: #334155;
+            margin-bottom: 10px;
+        }
+
+        .eyebrow .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--brand1), var(--brand2));
+        }
+
+        .impact {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 14px;
+            background: linear-gradient(90deg, rgba(79, 70, 229, .06), rgba(6, 182, 212, .06));
+            border: 1px solid rgba(0, 0, 0, .06);
+        }
+
+        .impact .line1 {
+            font-weight: 800;
+            letter-spacing: -.015em;
+            font-size: clamp(16px, 2vw, 24px);
+            line-height: 1.15;
+            color: #0b0d11;
+        }
+
+        .impact .line2 {
+            margin-top: 4px;
+            color: #4b5563;
+            font-size: clamp(16px, 2.1vw, 18px);
+            line-height: 1.4;
+        }
+
+        .bullets {
+            display: grid;
+            gap: 8px;
+            margin: 12px 0 6px;
+        }
+
+        .item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .marker {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--brand1), var(--brand2));
+            margin-top: 8px;
+            flex: 0 0 auto;
+        }
+
+        .item p {
+            margin: 0;
+            color: #374151;
+            font-size: 14.5px;
+            line-height: 1.45;
+        }
+
+        #sdh-prop-dev .media {
+            aspect-ratio: 16/9;
+            min-height: 280px;
+            max-height: 420px;
+            margin: 10px;
+        }
+
+        @media(max-width: 980px) {
+            #sdh-prop-dev .card {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            #sdh-prop-dev .media {
+                aspect-ratio: 16/10;
+                max-height: none;
+                min-height: 240px;
+                order: -1;
+            }
+            #sdh-prop-dev .content {
+                order: 0;
+            }
+        }
+
+        /* ========== SECCIÓN K: SERVICIOS/PAQUETES ========== */
+        #servicios {
+            padding-top: clamp(60px, 8vw, 100px);
+        }
+
+        #servicios .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 2.2vw, 28px);
+        }
+
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .plan {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            background: linear-gradient(180deg, #fff, #f9fafb);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 10px 30px rgba(0, 0, 0, .06);
+            padding: 22px;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .plan:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, .08);
+        }
+
+        .plan h4 {
+            margin: 0 0 6px;
+            font-size: 18px;
+        }
+
+        .plan .sub {
+            font-size: 13px;
+            color: #6b7280;
+            margin: 0 0 10px;
+        }
+
+        .plan .bullets {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 8px;
+        }
+
+        .plan .bullets li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            line-height: 1.45;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .plan .bullets .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #4f46e5, #06b6d4);
+            margin-top: .45em;
+            flex: 0 0 auto;
+        }
+
+        .ideal {
+            margin-top: 12px;
+            color: #111827;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .cta {
+            margin-top: 16px;
+        }
+
+        .plan.featured {
+            border: 1px solid #0f172a;
+            background: linear-gradient(180deg, #fff, #f3f4f6);
+        }
+
+        @media(max-width: 980px) {
+            .pricing {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 640px) {
+            .pricing {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== SECCIÓN L: CTA FINAL ========== */
+        #cta section {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(180deg, #ffffff 0%, #B78CFF 65%, #A874FF 100%);
+        }
+
+        #cta .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        #cta h3 {
+            font-size: clamp(32px, 6vw, 56px);
+            line-height: 1.08;
+            margin: 0 0 10px;
+            font-weight: 700;
+            color: #0b0d11;
+        }
+
+        #cta p {
+            font-size: clamp(18px, 2.4vw, 24px);
+            margin: 0 0 22px;
+            color: #1f2937;
+        }
+
+        #cta .actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        #cta .whats {
+            background: #25D366;
+            color: #083c15;
+            text-decoration: none;
+        }
+
+        #cta .whats:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== SECCIÓN A: HEADER ========== -->
+    <div id="sdh-header">
+        <header>
+            <div class="wrap nav">
+                <!-- Marca con logo -->
+                <a href="#sdh-hero" class="brand">
+                    <img src="https://static.wixstatic.com/media/946213_f4117025381a40e1a0c9590ad760e89f~mv2.jpeg" alt="Logo SDH">
+                    <div class="brand-name">SDH · Ingeniería &amp; Tecnología</div>
+                </a>
+
+                <!-- Navegación -->
+                <div class="nav-cta">
+                    <div class="dropdown" id="nav-ing">
+                        <a href="#" class="nav-link" aria-haspopup="true" aria-expanded="false">+ Ingeniería <span class="chev"></span></a>
+                        <div class="menu" role="menu" aria-label="Ingeniería">
+                            <a role="menuitem" href="https://www.sdhecu.com/modex3">ModeX</a>
+                            <a role="menuitem" href="https://www.sdhecu.com/geotecnia">Geotecnia &amp; Pavimentos</a>
+                        </div>
+                    </div>
+                    <a class="tag" href="#servicios">Servicios</a>
+                    <a class="tag" href="#cta">Contacto</a>
+                    <a class="tag" href="https://www.sdhecu.com/equipo">Equipo</a>
+
+                    <!-- Selector de idioma -->
+                    <div class="lang" id="lang">
+                        <a href="#" class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">
+                            <span class="globe" aria-hidden="true"></span>
+                            <span>ES</span>
+                        </a>
+                        <div class="lang-menu" role="menu" aria-label="Idioma del sitio">
+                            <a role="menuitem" href="/es/" class="active">ES · Español</a>
+                            <a role="menuitem" href="/en/">EN · English</a>
+                        </div>
+                    </div>
+
+                    <a class="btn" href="https://www.sdhecu.com/contacto-l" rel="noopener">Agendar reunión</a>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- ========== SECCIÓN B: HERO ========== -->
+    <section id="sdh-hero">
+        <div class="container">
+            <h1>Diseña mejor. Construye más inteligente.</h1>
+            <p class="lead">
+                Ingeniería Estructural BIM: arquitectura y estructura trabajando en un mismo modelo. Coordinación real, decisiones unificadas y estructuras optimizadas listas para construir.
+            </p>
+            <a class="btn" href="#cta">Contactar ahora</a>
+
+            <!-- Marquee infinito -->
+            <div class="logo-marquee" aria-label="Empresas que confían en SDH">
+                <div class="logo-strip" id="logoStrip">
+                    <img src="https://static.wixstatic.com/media/946213_473120dedd714f089989b469fd4ff6cb~mv2.png" alt="Logo 1" loading="lazy">
+                    <img src="https://static.wixstatic.com/media/946213_d2f87cb474384889826877e08e9cb11f~mv2.png" alt="Logo 2" loading="lazy">
+                    <img src="https://static.wixstatic.com/media/946213_7d454d0ccdb549fd9cd670f7b6a59ff0~mv2.png" alt="Logo 3" loading="lazy">
+                    <img src="https://static.wixstatic.com/media/946213_71e4695878634e4c8c9ad610fe94a687~mv2.png" alt="Logo 4" loading="lazy">
+                    <img src="https://static.wixstatic.com/media/946213_36b39fa24b5f495289498ba67976a244~mv2.png" alt="Logo 5" loading="lazy">
+                    <img src="https://static.wixstatic.com/media/946213_9ded61f7a7c8455ea3634037f4b8915d~mv2.png" alt="Logo 6" loading="lazy">
+                    <img src="https://static.wixstatic.com/media/946213_12c013c51a084095827ed9e9d2ec7c2a~mv2.png" alt="Logo 7" loading="lazy">
+                    <img src="https://static.wixstatic.com/media/946213_89f91a9092a04c4b8529dfa13c32c8fd~mv2.png" alt="Logo 8" loading="lazy">
+                    <img src="https://static.wixstatic.com/media/946213_f0bc50d016f341458081711d7d63fb1b~mv2.png" alt="Logo 9" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECCIÓN C: KPI ROW ========== -->
+    <section id="sdh-kpis">
+        <div class="container kpi-wrap" aria-label="Indicadores clave de desempeño">
+            <article class="kpi">
+                <div class="val">+100.000</div>
+                <div class="lbl">m² diseñados</div>
+                <div class="sub">Cada proyecto nos hace más precisos y ágiles para ti.</div>
+            </article>
+
+            <article class="kpi">
+                <div class="val">0%</div>
+                <div class="lbl">interferencias críticas</div>
+                <div class="sub">Un solo modelo, todas las disciplinas, cero interferencias.</div>
+            </article>
+
+            <article class="kpi">
+                <div class="val">90%</div>
+                <div class="lbl">entregas en fecha</div>
+                <div class="sub">Cumplimos lo que prometemos y alineamos hitos con tu equipo.</div>
+            </article>
+
+            <article class="kpi">
+                <div class="val">95%</div>
+                <div class="lbl">aprobación 1ra revisión</div>
+                <div class="sub">Normativa al día y documentación lista para entes de control.</div>
+            </article>
+
+            <article class="kpi">
+                <div class="val">100%</div>
+                <div class="lbl">respuestas &lt; 24 h</div>
+                <div class="sub">Siempre disponibles, sin esperas ni cuellos de botella.</div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ========== SECCIÓN D: PROBLEMA → SOLUCIÓN ========== -->
+    <section id="sdh-problema">
+        <div class="inner">
+            <h2>Del caos entre disciplinas al control total con BIM colaborativo</h2>
+            <p>Menos incertidumbre, menos errores en obra y decisiones claras desde el diseño.</p>
+
+            <div class="compare">
+                <div class="card" aria-label="Antes: flujo tradicional">
+                    <h4>Flujo tradicional</h4>
+                    <ul class="bad">
+                        <li>Trabajo fragmentado entre disciplinas</li>
+                        <li>Costos y metrados definidos al final</li>
+                        <li>Comunicación lenta y sin trazabilidad</li>
+                        <li>Correcciones y retrabajos constantes</li>
+                        <li>Planos 2D confusos y desactualizados</li>
+                    </ul>
+                </div>
+
+                <div class="card" aria-label="Ahora: flujo BIM con SDH">
+                    <h4>Flujo BIM SDH</h4>
+                    <ul class="good">
+                        <li>Coordinación total ARQ--Estructuras--MEP</li>
+                        <li>Costos en tiempo real y control continuo</li>
+                        <li>Datos en la nube, decisiones en tiempo real</li>
+                        <li>Diseño coordinado desde la fase inicial</li>
+                        <li>Modelos 3D precisos y listos para obra</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECCIÓN E: RESULTADOS ========== -->
+    <section id="resultados">
+        <div class="container">
+            <div class="section-head">
+                <h3>Resultados que hablan</h3>
+                <span class="tag">Promedios representativos de proyectos</span>
+            </div>
+
+            <div class="kpi-cards">
+                <div class="kpi-card" tabindex="0">
+                    <div class="big">-8% a -15%</div>
+                    <p>Ahorro en costos de obra gracias a metodología BIM.</p>
+                </div>
+
+                <div class="kpi-card" tabindex="0">
+                    <div class="big">-60%</div>
+                    <p>Disminución de errores de diseño y rework.</p>
+                </div>
+
+                <div class="kpi-card" tabindex="0">
+                    <div class="big">-20%</div>
+                    <p>Reducción de plazos por coordinación y decisiones tempranas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECCIÓN F: INTEGRACIÓN BIM ========== -->
+    <section id="sdh-integracion-bim">
+        <div class="container">
+            <article class="card">
+                <!-- IZQUIERDA: imagen -->
+                <figure class="media">
+                    <img src="https://static.wixstatic.com/media/946213_3ebe00ac6f27491dbfbcca845ae3c054~mv2.jpg" alt="Equipo coordinando arquitectura e ingeniería en entorno BIM" loading="lazy">
+                    <span class="glow" aria-hidden="true"></span>
+                </figure>
+
+                <!-- DERECHA: texto -->
+                <div class="content">
+                    <h3 class="title">
+                        Integramos arquitectura e ingeniería en un flujo BIM unificado donde cada decisión se entiende, se mide y se anticipa.
+                    </h3>
+                    <p class="lead">
+                        Todo ---planos, modelos y detalles técnicos--- se construye con precisión, colaboración y una visión orientada a la construcción.
+                    </p>
+                    <div class="actions">
+                        <a class="btn" href="#cta">Contáctanos</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ========== SECCIÓN G: METODOLOGÍA ========== -->
+    <section id="metodologia">
+        <div class="container">
+            <div class="section-head">
+                <div class="section-left">
+                    <h3>Un proceso estructural pensado para arquitectos</h3>
+                    <p class="section-sub">
+                        Un sistema integrado donde las decisiones se validan en tiempo real y los equipos avanzan como uno solo.
+                    </p>
+                </div>
+                <span class="tag">Visual, trazable y colaborativo</span>
+            </div>
+
+            <div class="flow">
+                <div class="p-step">
+                    <div class="p-ring">
+                        <div class="p-icon">
+                            <img src="https://img.icons8.com/ios-filled/80/000000/meeting.png" width="36" height="36" alt="">
+                        </div>
+                    </div>
+                    <div class="p-title">Inicio de Proyecto</div>
+                    <p class="p-desc">Objetivos, stakeholders y protocolo BIM.</p>
+                </div>
+
+                <div class="p-step">
+                    <div class="p-ring">
+                        <div class="p-icon">
+                            <img src="https://img.icons8.com/ios-filled/100/000000/structural.png" width="36" height="36" alt="">
+                        </div>
+                    </div>
+                    <div class="p-title">Geometría 3D</div>
+                    <p class="p-desc">Modelo estructural basado en arquitectura (IFC/Revit/Archicad).</p>
+                </div>
+
+                <div class="p-step">
+                    <div class="p-ring">
+                        <div class="p-icon">
+                            <img src="https://img.icons8.com/ios-filled/100/000000/conference-call.png" width="36" height="36" alt="">
+                        </div>
+                    </div>
+                    <div class="p-title">Coordinación</div>
+                    <p class="p-desc">Aprobaciones por fase y convergencia ARQ--ING.</p>
+                </div>
+
+                <div class="p-step">
+                    <div class="p-ring">
+                        <div class="p-icon">
+                            <img src="https://img.icons8.com/ios-filled/90/000000/line-chart.png" width="36" height="36" alt="">
+                        </div>
+                    </div>
+                    <div class="p-title">Simulation & Analysis</div>
+                    <p class="p-desc">Diseño sismo-resistente (Etabs, SAP, Tekla).</p>
+                </div>
+
+                <div class="p-step">
+                    <div class="p-ring">
+                        <div class="p-icon">
+                            <img src="https://img.icons8.com/ios-filled/100/000000/city-buildings.png" width="36" height="36" alt="">
+                        </div>
+                    </div>
+                    <div class="p-title">BIM BUILD</div>
+                    <p class="p-desc">LOD 300--400 con control de calidad.</p>
+                </div>
+
+                <div class="p-step">
+                    <div class="p-ring">
+                        <div class="p-icon">
+                            <img src="https://img.icons8.com/ios-filled/100/000000/gears.png" width="36" height="36" alt="">
+                        </div>
+                    </div>
+                    <div class="p-title">Optimización</div>
+                    <p class="p-desc">Precisión de elementos y ahorro de materiales.</p>
+                </div>
+
+                <div class="p-step">
+                    <div class="p-ring">
+                        <div class="p-icon">
+                            <img src="https://img.icons8.com/ios-filled/100/000000/document.png" width="36" height="36" alt="">
+                        </div>
+                    </div>
+                    <div class="p-title">Documentación</div>
+                    <p class="p-desc">Planos, metrados, memorias y set constructivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECCIÓN H: PROYECTOS ========== -->
+    <section id="proyectos">
+        <div class="container">
+            <div class="section-head">
+                <h3>Proyectos</h3>
+                <span class="tag">+350 proyectos diseñados</span>
+            </div>
+
+            <p class="intro">
+                SDH cuenta con experiencia comprobada en proyectos residenciales y comerciales en Ecuador y EEUU, así como en colaboración técnica con estudios arquitectónicos de alto nivel.
+            </p>
+
+            <div class="carousel" aria-label="Carrusel de proyectos">
+                <div class="track" id="proj-track">
+                    <figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_dbc86caa0a86451c9c947154878156b5~mv2.jpeg" loading="lazy" alt="Proyecto 1">
+                        <figcaption class="cap">Residencial</figcaption>
+                    </figure>
+<figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_82fbd72b01da48c88b5ac5f2542c05cf~mv2.jpeg" loading="lazy" alt="Proyecto 2">
+                        <figcaption class="cap">Comercial</figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_490d2363a8484863aa6137732a687e61~mv2.jpeg" loading="lazy" alt="Proyecto 3">
+                        <figcaption class="cap">Mixto</figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_90620e711a7a4c6eacbac83bd26a4405~mv2.jpeg" loading="lazy" alt="Proyecto 4">
+                        <figcaption class="cap">Residencial</figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_fdb47e6e658442a7a83a3befdc8cea6e~mv2.jpeg" loading="lazy" alt="Proyecto 5">
+                        <figcaption class="cap">Comercial</figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_646da5d6216c4908ab7c1e3d4e7f1c8f~mv2.jpeg" loading="lazy" alt="Proyecto 6">
+                        <figcaption class="cap">Mixto</figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_50a804e65a5945dc8568308afc8b0127~mv2.jpeg" loading="lazy" alt="Proyecto 7">
+                        <figcaption class="cap">Residencial</figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_935cb2dcfad04cee8500dfc30739147f~mv2.jpeg" loading="lazy" alt="Proyecto 8">
+                        <figcaption class="cap">Comercial</figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_2659ba870caa422aa1a64b4bdc922fdd~mv2.jpeg" loading="lazy" alt="Proyecto 9">
+                        <figcaption class="cap">Mixto</figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_969d778cf5f1441fa4f2a81e241a634d~mv2.jpeg" loading="lazy" alt="Proyecto 10">
+                        <figcaption class="cap">Residencial</figcaption>
+                    </figure>
+
+                    <figure class="slide">
+                        <img src="https://static.wixstatic.com/media/946213_32572deb268146369bc7d1412ba639ff~mv2.jpeg" loading="lazy" alt="Proyecto 11">
+                        <figcaption class="cap">Mixto</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECCIÓN I: VENTAJAS ========== -->
+    <section id="ventajas">
+        <div class="container">
+            <div class="section-head">
+                <h3>Ventajas de trabajar con SDH</h3>
+                <span class="tag">Pruebas de valor comprobables en proyectos</span>
+            </div>
+
+            <div class="benefits">
+                <div class="benefit">
+                    <span class="dot"></span>
+                    <div>
+                        <h4>Una sola plataforma</h4>
+                        <p>Arquitectura e ingeniería trabajan en un mismo entorno BIM, con información sincronizada y decisiones unificadas.</p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <span class="dot"></span>
+                    <div>
+                        <h4>Comunicación pro-solución</h4>
+                        <p>Reuniones efectivas, lenguaje común y enfoque en resolver, no discutir.</p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <span class="dot"></span>
+                    <div>
+                        <h4>Diseño optimizado y adaptable</h4>
+                        <p>Ajustamos la estructura a tu sistema constructivo, reduciendo materiales y retrabajos.</p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <span class="dot"></span>
+                    <div>
+                        <h4>Costos y cantidades en tiempo real</h4>
+                        <p>Control total de materiales, presupuestos y decisiones económicas dentro del modelo.</p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <span class="dot"></span>
+                    <div>
+                        <h4>Conceptualización inicial sin costo</h4>
+                        <p>Exploramos soluciones desde el inicio para definir el camino más eficiente y rentable.</p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <span class="dot"></span>
+                    <div>
+                        <h4>Soporte técnico en obra</h4>
+                        <p>Acompañamiento durante ejecución con visitas, revisiones BIMx y asistencia pos-entrega.</p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <span class="dot"></span>
+                    <div>
+                        <h4>Seguridad y respaldo garantizado</h4>
+                        <p>100 GB de almacenamiento en la nube durante 5 años, con respaldo continuo y acceso remoto.</p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <span class="dot"></span>
+                    <div>
+                        <h4>Formación continua</h4>
+                        <p>Capacitamos equipos en SDH.edu y compartimos buenas prácticas BIM para fortalecer tu operación.</p>
+                    </div>
+                </div>
+
+                <div class="benefit">
+                    <span class="dot"></span>
+                    <div>
+                        <h4>Asociación estratégica</h4>
+                        <p>Colaboramos en concursos y proyectos conjuntos, potenciando tu portafolio y competitividad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECCIÓN J: PROPIETARIOS ========== -->
+    <section id="sdh-prop-dev">
+        <div class="container">
+            <article class="card">
+                <!-- IZQUIERDA: contenido -->
+                <div class="content">
+                    <div class="eyebrow">
+                        <span class="dot"></span> Para propietarios y desarrolladores
+                    </div>
+
+                    <h3 class="title">Construir no es solo levantar una obra: es decidir sobre valor, seguridad y tiempo.</h3>
+
+                    <div class="impact" aria-label="Relación inversión vs impacto">
+                        <div class="line1">&lt; 2 % de inversión, 100 % de impacto.</div>
+                        <div class="line2">El diseño estructural suele representar menos del 2 % del costo total, pero determina el 100 % de la seguridad, durabilidad y valor patrimonial.</div>
+                    </div>
+
+                    <div class="bullets">
+                        <div class="item">
+                            <span class="marker"></span>
+                            <p>Evitar problemas cuesta menos que resolverlos.</p>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <a class="btn" href="#cta">Contáctanos</a>
+                    </div>
+                </div>
+
+                <!-- DERECHA: imagen -->
+                <figure class="media">
+                    <img src="https://static.wixstatic.com/media/946213_b8b0a17e01f74c2f8943f6ff45ba256a~mv2.jpg" alt="Propietarios revisando decisiones estructurales con equipo SDH en entorno BIM" loading="lazy">
+                    <span class="glow" aria-hidden="true"></span>
+                </figure>
+            </article>
+        </div>
+    </section>
+
+    <!-- ========== SECCIÓN K: SERVICIOS/PAQUETES ========== -->
+    <section id="servicios">
+        <div class="container">
+            <div class="section-head">
+                <h3>Elige el nivel de desarrollo que tu proyecto necesita</h3>
+            </div>
+
+            <div class="pricing">
+                <!-- Essential -->
+                <article class="plan">
+                    <div>
+                        <h4>Essential</h4>
+                        <p class="sub">Viviendas y edificaciones menores</p>
+                        <ul class="bullets">
+                            <li><span class="dot"></span><span>Reunión de coordinación para definir lineamientos estructurales.</span></li>
+                            <li><span class="dot"></span><span>Arquitectura alineada con criterios estructurales básicos desde el inicio.</span></li>
+                            <li><span class="dot"></span><span>Modelo 3D estructural referencial, ideal para visualización y revisión de interferencias.</span></li>
+                            <li><span class="dot"></span><span>Documentación técnica CAD--BIM simplificada, práctica y eficiente.</span></li>
+                        </ul>
+                        <p class="ideal"><strong>Ideal para:</strong> proyectos residenciales o edificaciones menores que requieren coordinación rápida y eficiente.</p>
+                    </div>
+                    <div class="cta">
+                        <a class="btn" href="https://www.sdhecu.com/contacto-l">Cotizar</a>
+                    </div>
+                </article>
+
+                <!-- Pro -->
+                <article class="plan featured">
+                    <div>
+                        <h4>Pro</h4>
+                        <p class="sub">Viviendas especiales y edificios medianos</p>
+                        <ul class="bullets">
+                            <li><span class="dot"></span><span>3 reuniones clave: inicio, pre-diseño sísmico y revisión final.</span></li>
+                            <li><span class="dot"></span><span>Coordinación ARQ--STR por etapas con trazabilidad y control.</span></li>
+                            <li><span class="dot"></span><span>Modelo BIM con información estructural inteligente y parametrización.</span></li>
+                            <li><span class="dot"></span><span>Documentación técnica detallada 3D, LOD 300--400 para ejecución precisa.</span></li>
+                        </ul>
+                        <p class="ideal"><strong>Ideal para:</strong> estudios de arquitectura o constructoras que buscan integración de alto nivel.</p>
+                    </div>
+                    <div class="cta">
+                        <a class="btn" href="https://www.sdhecu.com/contacto-l">Cotizar</a>
+                    </div>
+                </article>
+
+                <!-- Advanced -->
+                <article class="plan">
+                    <div>
+                        <h4>Advanced</h4>
+                        <p class="sub">Proyectos de gran escala y desarrollos inmobiliarios</p>
+                        <ul class="bullets">
+                            <li><span class="dot"></span><span>Análisis comparativo de 2--3 alternativas estructurales para definir la opción más eficiente.</span></li>
+                            <li><span class="dot"></span><span>Entre 5 y 10 reuniones técnicas según el alcance del proyecto.</span></li>
+                            <li><span class="dot"></span><span>Optimización técnica y económica para la solución estructural más rentable.</span></li>
+                            <li><span class="dot"></span><span>Modelo BIM integral y validado para obra, con nivel de desarrollo LOD 400+.</span></li>
+                        </ul>
+                        <p class="ideal"><strong>Ideal para:</strong> proyectos de gran escala que demandan factibilidad comprobada, decisiones basadas en datos y estructuras optimizadas para costo y rendimiento.</p>
+                    </div>
+                    <div class="cta">
+                        <a class="btn" href="https://www.sdhecu.com/contacto-l">Cotizar</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECCIÓN L: CTA FINAL ========== -->
+    <div id="cta">
+        <section>
+            <div class="container">
+                <h3>¿Listo para colaborar con un equipo que entiende tu forma de diseñar y construir?</h3>
+                <p>Agenda una llamada de 30 minutos y analicemos alcance, plazos y oportunidades de optimización.</p>
+                <div class="actions">
+                    <a class="btn" href="https://www.sdhecu.com/contacto-l">Agendar ahora</a>
+                    <a class="btn whats" href="https://wa.me/593984296153?text=Hola%20SDH%2C%20quisiera%20agendar%20una%20reuni%C3%B3n" target="_blank" rel="noopener">WhatsApp</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script>
+        (function() {
+            // ===== DROPDOWN "INGENIERÍA" =====
+            const dd = document.getElementById('nav-ing');
+            if (dd) {
+                const trigger = dd.querySelector('.nav-link');
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dd.classList.toggle('open');
+                    trigger.setAttribute('aria-expanded', dd.classList.contains('open') ? 'true' : 'false');
+                });
+                document.addEventListener('click', (e) => {
+                    if (!dd.contains(e.target)) {
+                        dd.classList.remove('open');
+                        trigger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        dd.classList.remove('open');
+                        trigger.setAttribute('aria-expanded', 'false');
+                        trigger.focus();
+                    }
+                });
+            }
+
+            // ===== SELECTOR DE IDIOMA =====
+            const lang = document.getElementById('lang');
+            if (lang) {
+                const btn = lang.querySelector('.lang-btn');
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    lang.classList.toggle('open');
+                    btn.setAttribute('aria-expanded', lang.classList.contains('open') ? 'true' : 'false');
+                });
+                document.addEventListener('click', (e) => {
+                    if (!lang.contains(e.target)) {
+                        lang.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        lang.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+                        btn.focus();
+                    }
+                });
+            }
+
+            // ===== CARRUSEL DE LOGOS (HERO) =====
+            const strip = document.getElementById('logoStrip');
+            if (strip) {
+                // Duplicamos el contenido para loop perfecto
+                const clone = strip.cloneNode(true);
+                [...clone.children].forEach(child => strip.appendChild(child.cloneNode(true)));
+
+                // Ajustamos la duración de la animación según el ancho del contenido
+                const SPEED_PX_PER_SEC = 40;
+                const totalWidth = strip.scrollWidth / 2;
+                const duration = totalWidth / SPEED_PX_PER_SEC;
+                strip.style.animationDuration = duration + 's';
+
+                // Pausa al hover
+                strip.addEventListener('mouseenter', () => strip.classList.add('paused'));
+                strip.addEventListener('mouseleave', () => strip.classList.remove('paused'));
+
+                // Asegura inicio a la izquierda
+                strip.style.transform = 'translateX(0)';
+            }
+
+            // ===== CARRUSEL DE PROYECTOS =====
+            const track = document.getElementById('proj-track');
+            if (track) {
+                const slides = Array.from(track.children);
+                slides.forEach(s => track.appendChild(s.cloneNode(true))); // loop infinito
+
+                let x = 0, raf;
+                const speed = 0.4;
+                const step = () => {
+                    x -= speed;
+                    if (Math.abs(x) >= track.scrollWidth / 2) {
+                        x = 0;
+                    }
+                    track.style.transform = `translateX(${x}px)`;
+                    raf = requestAnimationFrame(step);
+                };
+
+                const pause = () => cancelAnimationFrame(raf);
+                const play = () => {
+                    cancelAnimationFrame(raf);
+                    raf = requestAnimationFrame(step);
+                };
+
+                track.addEventListener('mouseenter', pause);
+                track.addEventListener('mouseleave', play);
+
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(e => e.isIntersecting ? play() : pause());
+                }, { threshold: .1 });
+                io.observe(track);
+
+                play();
+            }
+
+            // ===== SMOOTH SCROLL SIN ANIMACIÓN =====
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    // Permitir enlaces externos que empiecen con #
+                    if (href === '#' || !href) return;
+                    
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({
+                            behavior: 'auto', // Sin animación
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>
